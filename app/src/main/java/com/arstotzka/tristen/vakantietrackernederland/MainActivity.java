@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+//Made by Tristen
 public class MainActivity extends AppCompatActivity {
 ListView hoofdList;
 ArrayAdapter adapter;
