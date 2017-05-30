@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.arstotzka.tristen.vakantietrackernederland.hoofdAdapter">
+
+    <TextView
+        android:id="@+id/vakantie_ID_txt"
+        android:layout_width="210dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="22dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Zomervakantie" />
+
+    <TextView
+        android:id="@+id/regio_ID_nr"
+        android:layout_width="26dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintLeft_toRightOf="@+id/vakantie_ID_txt"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="3" />
+
+    <TextView
+        android:id="@+id/regio_ID_txt"
+        android:layout_width="63dp"
+        android:layout_height="23dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="30dp"
+        android:text="TextView"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@+id/regio_ID_nr"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="regio's" />
+
+</android.support.constraint.ConstraintLayout>
