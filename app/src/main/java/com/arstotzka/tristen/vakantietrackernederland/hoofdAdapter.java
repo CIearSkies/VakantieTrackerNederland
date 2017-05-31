@@ -1,6 +1,7 @@
 package com.arstotzka.tristen.vakantietrackernederland;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,13 +24,14 @@ public class hoofdAdapter extends ArrayAdapter<VakantieItem> {
         }
 
         TextView vakTitle = (TextView) convertView.findViewById(R.id.vakantie_ID_txt);
-        vakTitle.setText("Test");
+        vakTitle.setText(va.name);
+        if(position%2==0){vakTitle.setTextColor(Color.BLUE);}
 
         TextView regioNr = (TextView) convertView.findViewById(R.id.regio_ID_nr);
-        regioNr.setText("Test");
+        regioNr.setText(va.tijdvak.get(0).region);
 
         TextView regioTxt = (TextView) convertView.findViewById(R.id.regio_ID_txt);
-        regioTxt.setText("Test");
+        if(va.tijdvak.get(0).region.equals("1")){ regioTxt.setText("Regio"); } else regioTxt.setText("Regio's");
 
         return convertView;
     }
