@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".hoofdAdapter" />
-        <activity android:name=".VakantieDetail"></activity>
+        <activity android:name=".VakantieDetail" />
+        <activity android:name=".detailAdapter"></activity>
     </application>
 
 </manifest>

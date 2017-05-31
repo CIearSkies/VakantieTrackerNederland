@@ -1,9 +1,12 @@
 package com.arstotzka.tristen.vakantietrackernederland;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -12,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 //Made by Tristen
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 ListView hoofdList;
 ArrayAdapter adapter;
 ArrayList<VakantieItem> vakanties;
@@ -48,9 +51,18 @@ ArrayList<VakantieItem> vakanties;
 
             adapter= new hoofdAdapter(this,vakanties);
             hoofdList.setAdapter(adapter);
+            hoofdList.setOnItemClickListener(this);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterview, View view, int i, long l){
+        VakantieItem item = (VakantieItem) vakanties.get(i);
+        Intent intent = new Intent(getApplicationContext(),VakantieDetail.class);
+        //intent.putExtra();
+        startActivity(intent);
     }
 }
