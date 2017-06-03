@@ -62,7 +62,7 @@ ArrayList<VakantieItem> vakanties;
     public void onItemClick(AdapterView<?> adapterview, View view, int i, long l){
         VakantieItem item = (VakantieItem) vakanties.get(i);
         Intent intent = new Intent(getApplicationContext(),VakantieDetail.class);
-        //intent.putExtra();
+        intent.putExtra("VAKANTIE_ITEM", item);
         startActivity(intent);
     }
 }

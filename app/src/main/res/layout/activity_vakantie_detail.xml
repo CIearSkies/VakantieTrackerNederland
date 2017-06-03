@@ -7,7 +7,7 @@
     tools:context="com.arstotzka.tristen.vakantietrackernederland.MainActivity">
 
     <ListView
-        android:id="@+id/regioList"
+        android:id="@+id/dataList"
         android:layout_width="384dp"
         android:layout_height="416dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/regioList"
+        app:layout_constraintBottom_toTopOf="@+id/dataList"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
