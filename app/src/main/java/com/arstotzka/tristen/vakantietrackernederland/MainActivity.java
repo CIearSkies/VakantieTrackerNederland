@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 ListView hoofdList;
 ArrayAdapter adapter;
 ArrayList<VakantieItem> vakanties;
-    Date startDate;
-    Date endDate;
+VakantieItem vakantieItem;
+    ArrayList<Tijdvak> tijden;
 
 
     @Override
@@ -34,33 +34,28 @@ ArrayList<VakantieItem> vakanties;
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
-        Date startDate = null;
+        tijden = new ArrayList();
+
         try {
-            startDate = dateFormat.parse("2016-10-16T22:00:00.000Z");
+            Date startDate = dateFormat.parse("2016-10-16T22:00:00.000Z");
             Date endDate = dateFormat.parse("2017-12-07T10:00:00.000Z");
             Tijdvak tijdvak = new Tijdvak("1", startDate, endDate);
-            ArrayList tijden = new ArrayList();
             tijden.add(tijdvak);
-            VakantieItem vakantieItem = new VakantieItem("Zomervakantie", true, tijden);
-            vakanties.add(vakantieItem);
-            vakanties.add(vakantieItem);
-            vakanties.add(vakantieItem);
-            vakanties.add(vakantieItem);
-
-
-
-            adapter= new hoofdAdapter(this,vakanties);
-            hoofdList.setAdapter(adapter);
-            hoofdList.setOnItemClickListener(this);
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        vakantieItem = new VakantieItem("Zomervakantie", true, tijden);
+        vakanties.add(vakantieItem);
+
+        adapter= new hoofdAdapter(this,vakanties);
+        hoofdList.setAdapter(adapter);
+        hoofdList.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterview, View view, int i, long l){
-        VakantieItem item = (VakantieItem) vakanties.get(i);
+        Tijdvak item = tijden.get(i);
         Intent intent = new Intent(getApplicationContext(),VakantieDetail.class);
         intent.putExtra("VAKANTIE_ITEM", item);
         startActivity(intent);

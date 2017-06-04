@@ -7,25 +7,29 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VakantieDetail extends AppCompatActivity {
 TextView title;
 ListView data;
 ArrayAdapter adapter;
-
+ArrayList<Tijdvak> tijdvakken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vakantie_detail);
 
+        tijdvakken=new ArrayList<Tijdvak>();
+
         title = (TextView) findViewById(R.id.vakantie_dt_title);
         data = (ListView) findViewById(R.id.dataList);
 
         Intent i = getIntent();
-        VakantieItem vakantieItem = (VakantieItem) i.getParcelableExtra("VAKANTIE_ITEM");
+        Tijdvak tijdvak = (Tijdvak) i.getSerializableExtra("VAKANTIE_ITEM");
 
-        //adapter= new hoofdAdapter(this,vakanties);
-        //detailAdapter.setAdapter(adapter);
+        tijdvakken.add(tijdvak);
+        adapter= new detailAdapter(this,tijdvakken);
+        data.setAdapter(adapter);
     }
 }

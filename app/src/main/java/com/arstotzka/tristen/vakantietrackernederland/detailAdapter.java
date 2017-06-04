@@ -12,20 +12,22 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class detailAdapter extends ArrayAdapter<VakantieItem> {
-    public detailAdapter(Context context, ArrayList<VakantieItem> vas){
+public class detailAdapter extends ArrayAdapter<Tijdvak> {
+    public detailAdapter(Context context, ArrayList<Tijdvak> vas){
         super(context, 0 , vas);}
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        VakantieItem va = getItem(position);
+        Tijdvak va = getItem(position);
         if(convertView == null){
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_detail_adapter,parent,false);
         }
 
         TextView regiotxt = (TextView) convertView.findViewById(R.id.NMZ_txt);
+        regiotxt.setText("Bleep");
 
         TextView datatxt = (TextView) convertView.findViewById(R.id.datums_txt);
+        datatxt.setText("Bleep");
         return convertView;
     }
 }
