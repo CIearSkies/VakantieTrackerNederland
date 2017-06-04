@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 //Made by Tristen
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, VakantieTaskListener{
 ListView hoofdList;
 ArrayAdapter adapter;
 ArrayList<VakantieItem> vakanties;
@@ -51,6 +51,20 @@ VakantieItem vakantieItem;
         adapter= new hoofdAdapter(this,vakanties);
         hoofdList.setAdapter(adapter);
         hoofdList.setOnItemClickListener(this);
+        fetch();
+    }
+
+    public void fetch(){
+        SchoolVakantieTask fetcher = new SchoolVakantieTask();
+        String[] urls = new String[]
+                {"https://opendata.rijksoverheid.nl/v1/sources/rijksoverheid/infotypes/schoolholidays/schoolyear/2016-2017?output=json"};
+        fetcher.execute(urls);
+    }
+
+    @Override
+    public void onVakantieItemAvailable(VakantieItem item){
+        vakanties.add(item);
+        adapter.notifyDataSetChanged();
     }
 
     @Override

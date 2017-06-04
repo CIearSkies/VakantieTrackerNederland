@@ -15,6 +15,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Created by Tristen on 4-6-2017.
  */
@@ -61,5 +63,16 @@ public class SchoolVakantieTask extends AsyncTask<String, Void, String>{
         }
 
         return response;
+    }
+
+    protected void onProgressUpdate(Integer... progress){Log.i(TAG,progress.toString());}
+
+    protected void onPostExecute(String response){
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray vakanties = jsonObject.getJSONObject("content").getJSONArray("vacations");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
