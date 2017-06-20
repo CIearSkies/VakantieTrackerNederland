@@ -14,6 +14,10 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static android.content.ContentValues.TAG;
 
@@ -22,6 +26,10 @@ import static android.content.ContentValues.TAG;
  */
 
 public class SchoolVakantieTask extends AsyncTask<String, Void, String>{
+
+    private VakantieTaskListener listener;
+
+    public SchoolVakantieTask(VakantieTaskListener listener){this.listener = listener;}
 
     @Override
     protected String doInBackground(String... params) {
@@ -61,7 +69,6 @@ public class SchoolVakantieTask extends AsyncTask<String, Void, String>{
                 }
             }
         }
-
         return response;
     }
 
@@ -70,7 +77,32 @@ public class SchoolVakantieTask extends AsyncTask<String, Void, String>{
     protected void onPostExecute(String response){
         try {
             JSONObject jsonObject = new JSONObject(response);
-            JSONArray vakanties = jsonObject.getJSONObject("content").getJSONArray("vacations");
+            JSONArray vakanties = jsonObject.getJSONArray("content").getJSONObject(0).getJSONArray("vacations");
+            for(int idx = 0; idx < vakanties.length(); idx ++){
+                String name = vakanties.getJSONObject(idx).getString("type");
+
+                Boolean compulsory = Boolean.getBoolean(vakanties.getJSONObject(idx).getString("compulsorydates"));
+
+                JSONArray regions = vakanties.getJSONObject(idx).getJSONArray("regions");
+
+                ArrayList<Tijdvak> tijdVakken = new ArrayList<>();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+                try {
+                    for(int i = 0; i <regions.length(); i++){
+                        String regio = regions.getJSONObject(i).getString("region");
+                        Date startdate = dateFormat.parse(regions.getJSONObject(i).getString("startdate"));
+                        Date enddate = dateFormat.parse(regions.getJSONObject(i).getString("enddate"));
+
+                        Tijdvak tv = new Tijdvak(regio, startdate, enddate);
+
+                        tijdVakken.add(tv);
+                    }
+                }catch (ParseException ex){
+                    Log.e(TAG, ex.getLocalizedMessage());
+                }
+                this.listener.onVakantieItemAvailable(new VakantieItem(name, compulsory, tijdVakken));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -26,9 +26,11 @@ ArrayList<Tijdvak> tijdvakken;
         data = (ListView) findViewById(R.id.dataList);
 
         Intent i = getIntent();
-        Tijdvak tijdvak = (Tijdvak) i.getSerializableExtra("VAKANTIE_ITEM");
+        VakantieItem item = (VakantieItem) i.getSerializableExtra("VAKANTIE_ITEM");
 
-        tijdvakken.add(tijdvak);
+        title.setText(item.name);
+
+        tijdvakken=item.tijdvak;
         adapter= new detailAdapter(this,tijdvakken);
         data.setAdapter(adapter);
     }

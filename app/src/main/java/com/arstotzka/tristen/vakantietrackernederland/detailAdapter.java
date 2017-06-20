@@ -24,10 +24,12 @@ public class detailAdapter extends ArrayAdapter<Tijdvak> {
         }
 
         TextView regiotxt = (TextView) convertView.findViewById(R.id.NMZ_txt);
-        regiotxt.setText("Bleep");
+        regiotxt.setText(va.region);
 
         TextView datatxt = (TextView) convertView.findViewById(R.id.datums_txt);
-        datatxt.setText("Bleep");
+        int startyear = va.startdate.getYear()+1900;
+        int endyear = va.enddate.getYear()+1900;
+        datatxt.setText("Van: "+va.startdate.getDate()+"-"+va.startdate.getMonth()+"-"+startyear+" Tot: "+va.enddate.getDate()+"-"+va.enddate.getMonth()+"-"+endyear);
         return convertView;
     }
 }

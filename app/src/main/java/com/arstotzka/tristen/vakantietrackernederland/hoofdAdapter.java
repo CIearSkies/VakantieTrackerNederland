@@ -28,7 +28,8 @@ public class hoofdAdapter extends ArrayAdapter<VakantieItem> {
         if(position%2==0){vakTitle.setTextColor(Color.BLUE);}
 
         TextView regioNr = (TextView) convertView.findViewById(R.id.regio_ID_nr);
-        regioNr.setText(va.tijdvak.get(0).region);
+        String aantalRegios = Integer.toString(va.tijdvak.size());
+        regioNr.setText(aantalRegios);
 
         TextView regioTxt = (TextView) convertView.findViewById(R.id.regio_ID_txt);
         if(va.tijdvak.get(0).region.equals("1")){ regioTxt.setText("Regio"); } else regioTxt.setText("Regio's");

@@ -36,18 +36,6 @@ VakantieItem vakantieItem;
 
         tijden = new ArrayList();
 
-        try {
-            Date startDate = dateFormat.parse("2016-10-16T22:00:00.000Z");
-            Date endDate = dateFormat.parse("2017-12-07T10:00:00.000Z");
-            Tijdvak tijdvak = new Tijdvak("1", startDate, endDate);
-            tijden.add(tijdvak);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        vakantieItem = new VakantieItem("Zomervakantie", true, tijden);
-        vakanties.add(vakantieItem);
-
         adapter= new hoofdAdapter(this,vakanties);
         hoofdList.setAdapter(adapter);
         hoofdList.setOnItemClickListener(this);
@@ -55,7 +43,7 @@ VakantieItem vakantieItem;
     }
 
     public void fetch(){
-        SchoolVakantieTask fetcher = new SchoolVakantieTask();
+        SchoolVakantieTask fetcher = new SchoolVakantieTask(this);
         String[] urls = new String[]
                 {"https://opendata.rijksoverheid.nl/v1/sources/rijksoverheid/infotypes/schoolholidays/schoolyear/2016-2017?output=json"};
         fetcher.execute(urls);
@@ -69,7 +57,7 @@ VakantieItem vakantieItem;
 
     @Override
     public void onItemClick(AdapterView<?> adapterview, View view, int i, long l){
-        Tijdvak item = tijden.get(i);
+        VakantieItem item = vakanties.get(i);
         Intent intent = new Intent(getApplicationContext(),VakantieDetail.class);
         intent.putExtra("VAKANTIE_ITEM", item);
         startActivity(intent);
